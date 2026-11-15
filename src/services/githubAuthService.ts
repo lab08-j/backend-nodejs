@@ -1,7 +1,6 @@
 import { ManagementClient } from 'auth0';
-import { PrismaClient } from '../../generated/prisma/client.ts';
+import { prisma } from '../lib/prisma';
 
-const prisma = new PrismaClient();
 
 // Initialize Management API client
 const management = new ManagementClient({
