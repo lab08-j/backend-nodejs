@@ -10,7 +10,10 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "prepare": "husky",
-    "dev": "npx tsx watch --env-file=.env src/server.ts"
+    "dev": "npx tsx watch --env-file=.env src/server.ts",
+    "db:migrate": "migrate-mongo up -f migrate-mongo-config.cjs",
+    "db:migrate:status": "migrate-mongo status -f migrate-mongo-config.cjs",
+    "db:migrate:down": "migrate-mongo down -f migrate-mongo-config.cjs"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +27,7 @@
     "eslint": "^10.14.0",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
+    "migrate-mongo": "^14.0.7",
     "prettier": "^3.9.10",
     "prisma": "^6.19.3",
     "tsup": "^8.5.1",
