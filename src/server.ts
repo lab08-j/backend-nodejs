@@ -1,16 +1,28 @@
-import express from "express";
-import dotenv from "dotenv";
+import 'dotenv/config';
+import express from 'express';
+import router from "./routers/routes";
+import cookieParser from 'cookie-parser';
+import { errorHandler } from './middleware/errorHandlers.ts';
+import { createServer } from 'node:http';
 
-dotenv.config();
 
 const app = express();
+const port = process.env.PORT || 3001;
+const server = createServer(app);
 
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
 
-app.get("/", async (req, res) => {
-  return res.send("Hello World");
+app.use('/api', router);
+app.use(errorHandler);
+
+app.get("/", (req, res) => {
+
+res.send("Hello World! NodeJS.");
+
 });
 
-app.listen(process.env.PORT, () => {
-  console.log("servidor rodando");
+server.listen(port, () => {
+    console.log(`API server running at http://localhost:${port}`);
 });
